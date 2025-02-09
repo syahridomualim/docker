@@ -1,0 +1,30 @@
+# docker-compose -f PubSubStandard_singleNode.yml up
+version: '3.3'
+
+services:
+  primary:
+    container_name: pubSubStandardSingleNode
+    image: solace/solace-pubsub-standard:latest
+    shm_size: 1g
+    ulimits:
+      core: -1
+      nofile:
+        soft: 2448
+        hard: 6592
+    ports:
+      - "8090:8080"   # Web management UI
+      - "8008:8008"   # Web transport
+      - "1883:1883"   # MQTT
+      - "8883:8883"   # MQTT TLS
+      - "5672:5672"   # AMQP
+      - "5671:5671"   # AMQP TLS
+      - "55555:55555" # SMF
+      - "55443:55443" # SMF TLS
+      - "9000:9000"   # REST
+      - "9443:9443"   # REST TLS
+      - "2222:2222"   # SSH
+    volumes:
+      - solace-data:/var/lib/solace # Persistent data storage
+
+volumes:
+  solace-data:

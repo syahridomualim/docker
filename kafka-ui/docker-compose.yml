@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 8085:8080
+    environment:
+      DYNAMIC_CONFIG_ENABLED: 'true'
+      # LOGGING_LEVEL_ROOT: 'DEBUG'
+    # volumes:
+    #   - /c/tools/kafka/kui/config.yml:/etc/kafkaui/dynamic_config.yaml
+
+networks:
+  kafka:
+    name: my-networks
+    external: true
